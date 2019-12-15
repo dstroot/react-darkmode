@@ -19,7 +19,7 @@ const Test = () => {
   );
 };
 
-describe("useBoolean hook", () => {
+describe("useBoolean", () => {
   it("should return false as the initial state", () => {
     const { container } = render(<Test />);
 
