@@ -16,9 +16,7 @@ export const DarkModeSwitch = () => {
   const dark = useMediaQuery(`screen and (prefers-color-scheme: dark)`);
   const light = useMediaQuery(`screen and (prefers-color-scheme: light)`);
   const [mode, setMode] = useState(() => {
-    // defaults
     let theme = themeType.light;
-    setIsOnFalse();
 
     // if we are in a browser
     if (typeof window !== "undefined") {
@@ -65,9 +63,8 @@ export const DarkModeSwitch = () => {
     }
   }, [scheme, dark, light, setIsOnTrue, setIsOnFalse]);
 
-  // if the user uses the toggle switch we save the setting
-  // in local storage to retain it.  Otherwise it is just set
-  // by the browser settings.
+  // if the user uses the toggle switch save the setting in local
+  // storage to retain it.  Otherwise just use the browser settings.
   const toggleTheme = () => {
     if (mode === themeType.light) {
       setMode(themeType.dark);
