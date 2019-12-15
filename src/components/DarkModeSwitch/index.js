@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 // components
 import Toggle from "components/Toggle";
 import useBoolean from "hooks/useBoolean";
+import useMediaQuery from "hooks/useMediaQuery";
 
 const themeType = {
   dark: "dark",
@@ -10,11 +11,14 @@ const themeType = {
 };
 
 export const DarkModeSwitch = () => {
-  const [isOn, setTrue, setFalse] = useBoolean(false);
+  const [isOn, setIsOnTrue, setIsOnFalse] = useBoolean(false);
+  const scheme = useMediaQuery(`screen and (prefers-color-scheme)`);
+  const dark = useMediaQuery(`screen and (prefers-color-scheme: dark)`);
+  const light = useMediaQuery(`screen and (prefers-color-scheme: light)`);
   const [mode, setMode] = useState(() => {
     // defaults
     let theme = themeType.light;
-    setFalse();
+    setIsOnFalse();
 
     // if we are in a browser
     if (typeof window !== "undefined") {
@@ -23,45 +27,57 @@ export const DarkModeSwitch = () => {
       if (val) {
         theme = JSON.parse(val);
         if (theme === themeType.dark) {
-          setTrue();
+          setIsOnTrue();
         }
+
+        // set to light, so return default (light)
         return theme;
       }
 
-      // determine browser setting
-      if (window.matchMedia("(prefers-color-scheme)").matches) {
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          theme = themeType.dark;
-          setTrue();
-        }
-        return theme;
-      }
-
+      // return default (light)
       return theme;
     }
 
+    // return default (light)
     return theme;
   });
 
+  // update body with class if mode changes
   useEffect(() => {
     if (typeof window !== "undefined") {
       document.body.className = mode;
     }
   }, [mode]);
 
-  // if we set local storage inside the toggle function it is
-  // only set if the user uses the toggle switch.  Otherwise
-  // it is just set by the browser settings.
+  // change mode if browser settings change
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (scheme) {
+        if (dark) {
+          setMode(themeType.dark);
+          setIsOnTrue();
+        }
+        if (light) {
+          setMode(themeType.light);
+          setIsOnFalse();
+        }
+      }
+    }
+  }, [scheme, dark, light, setIsOnTrue, setIsOnFalse]);
+
+  // if the user uses the toggle switch we save the setting
+  // in local storage to retain it.  Otherwise it is just set
+  // by the browser settings.
   const toggleTheme = () => {
     if (mode === themeType.light) {
       setMode(themeType.dark);
       localStorage.setItem("theme", JSON.stringify(themeType.dark));
-      setTrue();
+      setIsOnTrue();
     }
     if (mode === themeType.dark) {
       setMode(themeType.light);
       localStorage.setItem("theme", JSON.stringify(themeType.light));
-      setFalse();
+      setIsOnFalse();
     }
   };
 
