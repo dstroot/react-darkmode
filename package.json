@@ -41,6 +41,7 @@
     ]
   },
   "devDependencies": {
+    "css-mediaquery": "^0.1.2",
     "node-sass": "^4.13.0"
   }
 }
