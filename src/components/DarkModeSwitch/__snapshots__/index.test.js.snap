@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DarkModeSwitch renders a dark mode switch 1`] = `
+<DocumentFragment>
+  <input
+    class="react-switch-checkbox"
+    id="react-switch-new"
+    type="checkbox"
+  />
+  <label
+    class="react-switch-label"
+    for="react-switch-new"
+  >
+    <span
+      class="react-switch-button"
+    />
+  </label>
+</DocumentFragment>
+`;

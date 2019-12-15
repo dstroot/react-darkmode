@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toggle renders a toggle switch - OFF 1`] = `
+<DocumentFragment>
+  <input
+    class="react-switch-checkbox"
+    id="react-switch-new"
+    type="checkbox"
+  />
+  <label
+    class="react-switch-label"
+    for="react-switch-new"
+  >
+    <span
+      class="react-switch-button"
+    />
+  </label>
+</DocumentFragment>
+`;
+
+exports[`Toggle renders a toggle switch - ON 1`] = `
+<DocumentFragment>
+  <input
+    checked=""
+    class="react-switch-checkbox"
+    id="react-switch-new"
+    type="checkbox"
+  />
+  <label
+    class="react-switch-label"
+    for="react-switch-new"
+    style="background: blue;"
+  >
+    <span
+      class="react-switch-button"
+    />
+  </label>
+</DocumentFragment>
+`;
