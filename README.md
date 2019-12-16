@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React Dark Mode
+
+[![Dark Mode Video](https://i.ibb.co/XJYLM60/https-i-ytimg-com-vi-a-AHzf9zs-Ayc-maxresdefault.jpg)](https://youtu.be/aAHzf9zsAyc "Dark Mode Video")
 
 It's a simple app to play around with creating an app with "dark mode".  It will read your browser's setting and display light or dark mode as appropriate.  You can also override the setting with the toggle switch and this will save your preference in local storage so it will persist over page refreshes and future visits.  
 
