@@ -17,51 +17,53 @@ export const DarkModeSwitch = () => {
   const light = useMediaQuery(`screen and (prefers-color-scheme: light)`);
   const [mode, setMode] = useState(() => {
     let theme = themeType.light;
-
     // if we are in a browser
     if (typeof window !== "undefined") {
-      // is theme set in local storage already?
+      // return theme from local storage
       const val = localStorage.getItem("theme");
       if (val) {
         theme = JSON.parse(val);
-        if (theme === themeType.dark) {
-          setIsOnTrue();
-        }
-
-        // set to light, so return default (light)
         return theme;
       }
-
       // return default (light)
       return theme;
     }
-
     // return default (light)
     return theme;
   });
 
-  // update body with class if mode changes
+  // update body with class if mode changes and
+  // set toggle switch to match mode
   useEffect(() => {
     if (typeof window !== "undefined") {
       document.body.className = mode;
-    }
-  }, [mode]);
 
-  // change mode if browser settings change
+      if (mode === themeType.dark) {
+        setIsOnTrue();
+      }
+      if (mode === themeType.light) {
+        setIsOnFalse();
+      }
+    }
+  }, [mode, setIsOnFalse, setIsOnTrue]);
+
+  // change mode if browser settings change as long
+  // theme is not set in local storage
   useEffect(() => {
     if (typeof window !== "undefined") {
-      if (scheme) {
-        if (dark) {
-          setMode(themeType.dark);
-          setIsOnTrue();
-        }
-        if (light) {
-          setMode(themeType.light);
-          setIsOnFalse();
+      const val = localStorage.getItem("theme");
+      if (!val) {
+        if (scheme) {
+          if (dark) {
+            setMode(themeType.dark);
+          }
+          if (light) {
+            setMode(themeType.light);
+          }
         }
       }
     }
-  }, [scheme, dark, light, setIsOnTrue, setIsOnFalse]);
+  }, [scheme, dark, light]);
 
   // if the user uses the toggle switch save the setting in local
   // storage to retain it.  Otherwise just use the browser settings.
@@ -69,12 +71,10 @@ export const DarkModeSwitch = () => {
     if (mode === themeType.light) {
       setMode(themeType.dark);
       localStorage.setItem("theme", JSON.stringify(themeType.dark));
-      setIsOnTrue();
     }
     if (mode === themeType.dark) {
       setMode(themeType.light);
       localStorage.setItem("theme", JSON.stringify(themeType.light));
-      setIsOnFalse();
     }
   };
 
