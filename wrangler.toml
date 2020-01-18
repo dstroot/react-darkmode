@@ -1,0 +1,12 @@
+name = "react-darkmode"
+type = "webpack"
+account_id = "4acbfc4db4d7a6bebc4842f884d58305"
+workers_dev = true
+
+[site]
+bucket = "./build"
+entry-point = "workers-site"
+
+# It's OK to have your account_id public. Your API key and associated email address 
+# are kept secret inside .wrangler/config in your home directory. Everything in 
+# a wrangler.toml is committable to publicly accessible version control :)

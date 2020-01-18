@@ -1,6 +1,9 @@
 import React from "react";
 import { fireEvent, render, cleanup } from "@testing-library/react";
 
+// import { render, cleanup as cleanupReact } from '@testing-library/react';
+// import { cleanup as cleanupHooks, renderHook } from '@testing-library/react-hooks';
+
 // component to test
 import useBoolean from ".";
 
@@ -20,6 +23,16 @@ const Test = () => {
 };
 
 describe("useBoolean", () => {
+  it("should be an arrow function", () => {
+    // expect(useBoolean).to.be.a("function");
+    expect(useBoolean.prototype).toBe.empty;
+  });
+
+  // it('should return a single function', () => {
+  //   const { result } = renderHook(() => useBoolean());
+  //   expect(result.current).to.be.a('function');
+  // });
+
   it("should return false as the initial state", () => {
     const { container } = render(<Test />);
 

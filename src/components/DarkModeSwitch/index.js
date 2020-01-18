@@ -11,10 +11,10 @@ const themeType = {
 };
 
 export const DarkModeSwitch = () => {
-  const [isOn, setIsOnTrue, setIsOnFalse] = useBoolean(false);
   const scheme = useMediaQuery(`screen and (prefers-color-scheme)`);
   const dark = useMediaQuery(`screen and (prefers-color-scheme: dark)`);
   const light = useMediaQuery(`screen and (prefers-color-scheme: light)`);
+  const [isOn, setIsOnTrue, setIsOnFalse] = useBoolean(false);
   const [mode, setMode] = useState(() => {
     let theme = themeType.light;
     // if we are in a browser
